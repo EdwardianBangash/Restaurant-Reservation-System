@@ -1,15 +1,17 @@
-@include('Dashboard.includes.header')
+@extends('Dashboard.index')
 
-
-<form action="" method="POST">
+@section('content')
+<div class="category-wrapper">
+<h3>Edit Category</h3>
+<form action="{{route('updateCategory')}}" method="POST">
     @csrf
+    @method('PUT')
+    <div class="form-group">
     <label for="">Name</label>
-    <input type="text" class="form-control" name="name" placeholder="Enter Category name">
-
-    <input type="submit" class="btn btn-primary" value="Add">
+    <input type="hidden" class="form-control" name="id" value="{{$category->id}}">
+    <input type="text" class="form-control" name="name" value="{{$category->name}}">
+    </div>
+    <input type="submit" class="btn btn-dark" value="Edit">
 </form>
-
-
-
-
-@include('Dashboard.includes.footer')
+</div>
+@endsection
