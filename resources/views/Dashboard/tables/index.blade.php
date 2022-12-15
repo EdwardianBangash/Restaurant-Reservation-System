@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="category-wrapper">
-<h3>All Categories</h3>
+<h3>All Tables</h3>
 <table class="table table-striped">
     <tr>
         <th>#</th>
@@ -25,8 +25,8 @@
         </td>
         <td class="btn-group">
             <a href="{{route('editTable', $t->id)}}" class="btn btn-warning">Edit</a>
-            <form action="{{route('editCategory', $t->id)}}" method="POST" class="ml-2">
-                <input type="hidden" name="id" value="{{$t->id}}">
+            <form action="{{route('deleteTable', $t->id)}}" method="POST" class="ml-2">
+                @csrf
                 <input type="submit" class="btn btn-danger" value="Delete">
             </form>
         </td>

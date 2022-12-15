@@ -38,6 +38,11 @@ class DashboardController extends Controller
         return redirect()->route('categories');
     }
 
+    public function deleteCategory($id){
+        Category::find($id)->delete();
+        return redirect()->route('categories');
+    }
+
     public function tables(){
         $tables = DB::table('tables')->paginate(5);
         return view('Dashboard.tables.index', compact('tables'));
@@ -68,6 +73,11 @@ class DashboardController extends Controller
             'status' => $request->status
         ]);
 
+        return redirect()->route('tables');
+    }
+
+    public function deleteTable($id){
+        Table::find($id)->delete();
         return redirect()->route('tables');
     }
 }

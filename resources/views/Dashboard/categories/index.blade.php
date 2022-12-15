@@ -15,8 +15,8 @@
         <td>{{$c->name}}</td>
         <td class="btn-group">
             <a href="{{route('editCategory', $c->id)}}" class="btn btn-warning">Edit</a>
-            <form action="{{route('editCategory', $c->id)}}" method="POST" class="ml-2">
-                <input type="hidden" name="id" value="{{$c->id}}">
+            <form action="{{route('deleteCategory', $c->id)}}" method="POST" class="ml-2">
+                @csrf
                 <input type="submit" class="btn btn-danger" value="Delete">
             </form>
         </td>

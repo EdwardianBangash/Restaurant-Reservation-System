@@ -24,9 +24,11 @@ Route::get('/Dashboard/createCategory', [DashboardController::class, 'createCate
 Route::post('/Dashboard/storeCategory', [DashboardController::class, 'storeCategory'])->name('storeCategory');
 Route::get('/Dashboard/editCategory/{id}', [DashboardController::class, 'editCategory'])->name('editCategory');
 Route::put('/Dashboard/updateCategory', [DashboardController::class, 'updateCategory'])->name('updateCategory');
+Route::post('/Dashboard/deleteCategory/{id}', [DashboardController::class, 'deleteCategory'])->name('deleteCategory');
 
 Route::get('/Dashboard/tables', [DashboardController::class, 'tables'])->name('tables');
 Route::post('/Dashboard/storeTable', [DashboardController::class, 'storeTable'])->name('storeTable');
 Route::get('/Dashboard/createTable', [DashboardController::class, 'createTable'])->name('createTable');
 Route::get('/Dashboard/editTable/{id}', [DashboardController::class, 'editTable'])->name('editTable');
 Route::put('/Dashboard/updateTable', [DashboardController::class, 'updateTable'])->name('updateTable');
+Route::post('/Dashboard/deleteTable/{id}', [DashboardController::class, 'deleteTable'])->name('deleteTable');
