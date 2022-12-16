@@ -14,6 +14,26 @@
         </select>
     </div>
 
+    <div class="form-group">
+        <label for="">Menu</label>
+        <select name="menu_id" id="" class="form-control">
+            <option value="" selected disabled>Choose Menu</option>
+            @foreach ($menu as $t)
+                <option value="{{$t->id}}">{{$t->name}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="">Date</label>
+        <input type="date" name="date" id="" name="date" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="">Time</label>
+        <input type="time" name="time" id="" class="form-control">
+    </div>
+
     <input type="submit" value="Confirm" class="btn btn-primary">
 </form>
 

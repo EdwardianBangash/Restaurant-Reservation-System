@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\Table;
 use App\Models\Category;
 use App\Models\Reservation;
@@ -83,17 +84,20 @@ class DashboardController extends Controller
     }
 
     public function menu(){
-        $tables = DB::table('tables')->paginate(5);
-        return view('Dashboard.menu.index', compact('tables'));
+        $menus = DB::table('menus')->paginate(5);
+        return view('Dashboard.menu.index', compact('menus'));
     }
 
     public function storeMenu(Request $request){
-        Table::create([
+        if($request->file('image')){
+            $name = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public/images',$name);
+        }
+        Menu::create([
             'name' => $request->name,
-            'guest' => $request->guest,
-            'status' => $request->status
+            'image' => $name
         ]);
-        return redirect()->back()->with(['msg'=>'Table Added Successfully']);
+        return redirect()->back()->with(['msg'=>'Menu Added Successfully']);
     }
 
     public function createMenu(){
@@ -101,23 +105,27 @@ class DashboardController extends Controller
     }
 
     public function editMenu($id){
-        $table = Table::find($id);
-        return view('Dashboard.menu.edit', compact('table'));
+        $menu = Menu::find($id);
+        return view('Dashboard.menu.edit', compact('menu'));
     }
 
     public function updateMenu(Request $request){
-        Table::where('id',$request->id)->update([
+        if($request->file('new_image')){
+            $name = $request->file('new_image')->getClientOriginalName();
+            $request->file('new_image')->storeAs('public/images',$name);
+        }
+
+        Menu::where('id',$request->id)->update([
             'name' => $request->name,
-            'guest' => $request->guest,
-            'status' => $request->status
+            'image' => $request->file('new_image') ? $name : $request->old_image
         ]);
 
-        return redirect()->route('tables');
+        return redirect()->route('menu');
     }
 
     public function deleteMenu($id){
-        Table::find($id)->delete();
-        return redirect()->route('tables');
+        Menu::find($id)->delete();
+        return redirect()->route('menu');
     }
 
     public function reservations(){
@@ -138,7 +146,8 @@ class DashboardController extends Controller
 
     public function createReservation(){
         $tables = Table::where('status', 'Free')->get();
-        return view('create', compact('tables'));
+        $menu = Menu::all();
+        return view('create', compact(['tables', 'menu']));
     }
 
     public function editReservation($id){
