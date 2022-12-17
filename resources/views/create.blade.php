@@ -4,6 +4,9 @@
 <form action="{{route('storeReservation')}}" method="POST" id="reservationForm">
     @csrf
     <h2>Reservation Form</h2>
+    @php
+echo "<div class='alert alert-success'>".Session::has('msg') ? Session::get('msg') : ''."</div>";
+@endphp
     <div class="form-group">
         <label for="">Table</label>
         <select name="table_id" id="" class="form-control">
@@ -26,7 +29,7 @@
 
     <div class="form-group">
         <label for="">Date</label>
-        <input type="date" name="date" id="" name="date" class="form-control">
+        <input type="date" name="on_date" id="" name="date" class="form-control">
     </div>
 
     <div class="form-group">
